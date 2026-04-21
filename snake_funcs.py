@@ -1,6 +1,7 @@
 def inicializar_jogo(largura, altura):
-    # Fazemos exatamente o que o teste pediu, do jeito mais simples
+    meio_x = largura // 2
+    meio_y = altura // 2
     return {
-        "cobra": [(10, 5)],
-        "frutas": [(15, 5)]
+        "cobra": [(meio_x, meio_y)],
+        "frutas": [(meio_x + 3, meio_y)] # Fruta um pouco à frente
     }
