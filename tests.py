@@ -15,7 +15,7 @@ def test_deve_inicializar_o_jogo_com_uma_cobra_e_uma_fruta():
 def test_mover_cobra():
     estado = snake_funcs.inicializar_jogo(20,10)
 
-    estado["cobra"] = snake_funcs.mover_cobra(estado["cobra"], direcao="d")
+    estado["cobra"], estado["frutas"] = snake_funcs.mover_cobra(estado["cobra"], estado["frutas"], direcao="d")
 
     assert estado["cobra"][0] == (11,5)
     assert estado["cobra"][1] == (10,5)
