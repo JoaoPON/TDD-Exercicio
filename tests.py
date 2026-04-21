@@ -18,5 +18,5 @@ def test_mover_cobra():
     estado["cobra"] = snake_funcs.mover_cobra(estado["cobra"], direcao="d")
 
     assert estado["cobra"][0] == (11,5)
-    assert estado["cobra"][1] == (10, 5)
+    assert estado["cobra"][1] == (10,5)
     assert len(estado["cobra"]) == 2

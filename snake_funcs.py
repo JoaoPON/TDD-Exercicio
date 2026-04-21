@@ -7,7 +7,16 @@ def inicializar_jogo(largura, altura):
     }
 
 def mover_cobra(corpo, direcao):
+    if direcao not in "wasd":
+        return corpo
+    x, y = corpo[0]
     if direcao == "d":
-        corpo_novo = [(11,5),(10,5)]
-        return corpo_novo
-    return corpo
+        nova_cabeca = (x+1,y)
+    elif direcao == "w":
+        nova_cabeca = (x,y-1)
+    elif direcao == "s":
+        nova_cabeca = (x,y+1)
+    elif direcao == "a":
+        nova_cabeca = (x-1,y)
+    novo_corpo = [nova_cabeca] + corpo[:-1]
+    return novo_corpo

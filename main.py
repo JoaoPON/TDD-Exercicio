@@ -20,6 +20,11 @@ def rodar_jogo():
         
         ###adicione seu código para lidar com o jogo aqui
         
+        #Movimento o corpo da cobra
+        estado_jogo["cobra"] = snake_funcs.mover_cobra(estado_jogo["cobra"],interface.last_input)
+        #Limpa a matrix para o próximo frame
+        interface.matrix = [[0 for _ in range(dimensoes[0])] for _ in range(dimensoes[1])]
+
         #Todas as posições são corpo
         for x, y in estado_jogo["cobra"]:
             interface.matrix[y][x] = 1 # 1 é corpo
