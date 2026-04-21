@@ -1,8 +1,8 @@
-from snake_funcs import inicializar_jogo
+import snake_funcs
 
 #Etapa 1 - Inicializar Jogo
 def test_deve_inicializar_o_jogo_com_uma_cobra_e_uma_fruta():
-    estado = inicializar_jogo(largura=20, altura=10)
+    estado = snake_funcs.inicializar_jogo(largura=20, altura=10)
 
     assert "cobra" in estado
     assert estado["cobra"] == [(10,5),(9,5)]
@@ -13,9 +13,9 @@ def test_deve_inicializar_o_jogo_com_uma_cobra_e_uma_fruta():
 
 #Etapa 2 - Mover Cobra
 def test_mover_cobra():
-    estado = inicializar_jogo(20,10)
+    estado = snake_funcs.inicializar_jogo(20,10)
 
-    estado["cobra"] = mover_cobra(estado["cobra"], direcao="d")
+    estado["cobra"] = snake_funcs.mover_cobra(estado["cobra"], direcao="d")
 
     assert estado["cobra"][0] == (11,5)
     assert estado["cobra"][1] == (10, 5)
