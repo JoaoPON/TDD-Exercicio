@@ -12,7 +12,7 @@ def mover_cobra(corpo, frutas, direcao, dimensoes):
     largura, altura = dimensoes
     if direcao not in "wasd":
         return corpo, frutas
-    x, y = corpo[0] #(5,5) d (6,5)   (1,0)
+    x, y = corpo[0]
     if direcao == "d":
         nova_cabeca = (x+1,y)
         if nova_cabeca[0] > largura-1:

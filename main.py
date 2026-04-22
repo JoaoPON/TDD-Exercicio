@@ -17,7 +17,6 @@ def rodar_jogo():
         interface.display()
         print("mova com WASD, saia com esc. Ultimo botão:", end=' ')
         
-        
         ###adicione seu código para lidar com o jogo aqui
         
         #Movimento o corpo da cobra
@@ -42,6 +41,7 @@ def rodar_jogo():
 
 
         print(direcao)
+        print(f"Pontuação {len(estado_jogo["cobra"])-2}")
         if(direcao == 'end'):
             exit()
         time.sleep(velocidade)
