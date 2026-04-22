@@ -28,11 +28,20 @@ def mover_cobra(corpo, frutas, direcao):
     return novo_corpo, frutas
 
 def gerar_frutas(dimensoes, corpo):
+    largura, altura = dimensoes
+    novas_frutas = []
+    qta = 1
     if len(corpo) > 19:
-        return [(1,1),(1,1),(1,1)]
+        qta = 3
     elif len(corpo) > 9:
-        return [(1,1),(1,1)]
-    return [(1,1)]
+        qta = 2
+    
+    while len(novas_frutas) < qta:
+        x = random.randint(0,largura-1)
+        y = random.randint(0,altura-1)
+        posicao = (x,y)
 
+        if posicao not in corpo and posicao not in novas_frutas:
+            novas_frutas.append(posicao)
     
-    
+    return novas_frutas
