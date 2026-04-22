@@ -64,7 +64,12 @@ def test_fruta_nao_pode_nascer_dentro_da_cobra():
     
 
 #Etapa 5 - Sistema de Colisão
+def test_colisao_apenas_com_corpo():
+    corpo_mordido = [(5,5), (6,5), (5,5)]
+    assert snake_funcs.colisao(corpo_mordido) == True
 
+    corpo_seguro = [(10,5), (9,5), (8,5)]
+    assert snake_funcs.colisao(corpo_seguro) == False
 
 #Etapa 6 - Regras de Progressão
 
