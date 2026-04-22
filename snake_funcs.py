@@ -45,3 +45,9 @@ def gerar_frutas(dimensoes, corpo):
             novas_frutas.append(posicao)
     
     return novas_frutas
+
+def colisao(corpo):
+    if corpo[0] not in corpo[1:]:
+        return False
+    else:
+        return True
