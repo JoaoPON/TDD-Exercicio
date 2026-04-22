@@ -8,18 +8,27 @@ def inicializar_jogo(largura, altura):
         "frutas": [(meio_x + 3, meio_y)] # Fruta um pouco à frente
     }
 
-def mover_cobra(corpo, frutas, direcao):
+def mover_cobra(corpo, frutas, direcao, dimensoes):
+    largura, altura = dimensoes
     if direcao not in "wasd":
         return corpo, frutas
     x, y = corpo[0] #(5,5) d (6,5)   (1,0)
     if direcao == "d":
         nova_cabeca = (x+1,y)
+        if nova_cabeca[0] > largura-1:
+            nova_cabeca = (0,y)
     elif direcao == "w":
         nova_cabeca = (x,y-1)
+        if nova_cabeca[1] < 0:
+            nova_cabeca = (x,altura-1)
     elif direcao == "s":
         nova_cabeca = (x,y+1)
+        if nova_cabeca[1] > altura-1:
+            nova_cabeca = (x,0)
     elif direcao == "a":
         nova_cabeca = (x-1,y)
+        if nova_cabeca[0] < 0:
+            nova_cabeca = (largura-1,y)
 
     if nova_cabeca == corpo[1]:
         dx = x - corpo[1][0]

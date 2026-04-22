@@ -21,7 +21,7 @@ def rodar_jogo():
         ###adicione seu código para lidar com o jogo aqui
         
         #Movimento o corpo da cobra
-        estado_jogo["cobra"], estado_jogo["frutas"] = snake_funcs.mover_cobra(estado_jogo["cobra"], estado_jogo["frutas"],interface.last_input)
+        estado_jogo["cobra"], estado_jogo["frutas"] = snake_funcs.mover_cobra(estado_jogo["cobra"], estado_jogo["frutas"],interface.last_input, dimensoes)
         if snake_funcs.colisao(estado_jogo["cobra"]):
             exit()
         if len(estado_jogo["frutas"]) == 0:
