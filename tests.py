@@ -21,6 +21,14 @@ def test_mover_cobra():
     assert estado["cobra"][1] == (10,5)
     assert len(estado["cobra"]) == 2
 
+def test_impedir_movimento_oposto():
+    corpo = [(10, 5), (9, 5)]
+    frutas = []
+    
+    novo_corpo, _ = snake_funcs.mover_cobra(corpo, frutas, "a")
+    
+    assert novo_corpo[0] == (11, 5)
+
 
 #Etapa 3 - Comer Frutas e Crescer
 def test_comer_para_poder_crescer():

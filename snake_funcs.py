@@ -11,7 +11,7 @@ def inicializar_jogo(largura, altura):
 def mover_cobra(corpo, frutas, direcao):
     if direcao not in "wasd":
         return corpo, frutas
-    x, y = corpo[0]
+    x, y = corpo[0] #(5,5) d (6,5)   (1,0)
     if direcao == "d":
         nova_cabeca = (x+1,y)
     elif direcao == "w":
@@ -20,6 +20,12 @@ def mover_cobra(corpo, frutas, direcao):
         nova_cabeca = (x,y+1)
     elif direcao == "a":
         nova_cabeca = (x-1,y)
+
+    if nova_cabeca == corpo[1]:
+        dx = x - corpo[1][0]
+        dy = y - corpo[1][1]
+        nova_cabeca = (x + dx, y + dy)
+
     if nova_cabeca in frutas:
         novo_corpo = [nova_cabeca] + corpo
         frutas.remove(nova_cabeca)
