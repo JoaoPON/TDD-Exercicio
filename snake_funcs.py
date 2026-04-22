@@ -1,3 +1,5 @@
+import random
+
 def inicializar_jogo(largura, altura):
     meio_x = largura // 2
     meio_y = altura // 2
@@ -24,3 +26,13 @@ def mover_cobra(corpo, frutas, direcao):
     else:
         novo_corpo = [nova_cabeca] + corpo[:-1]
     return novo_corpo, frutas
+
+def gerar_frutas(dimensoes, corpo):
+    if len(corpo) > 19:
+        return [(1,1),(1,1),(1,1)]
+    elif len(corpo) > 9:
+        return [(1,1),(1,1)]
+    return [(1,1)]
+
+    
+    
