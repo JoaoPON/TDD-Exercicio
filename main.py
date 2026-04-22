@@ -22,6 +22,8 @@ def rodar_jogo():
         
         #Movimento o corpo da cobra
         estado_jogo["cobra"], estado_jogo["frutas"] = snake_funcs.mover_cobra(estado_jogo["cobra"], estado_jogo["frutas"],interface.last_input)
+        if snake_funcs.colisao(estado_jogo["cobra"]):
+            exit()
         if len(estado_jogo["frutas"]) == 0:
             estado_jogo["frutas"] = snake_funcs.gerar_frutas(dimensoes, estado_jogo["cobra"])
         #Limpa a matrix para o próximo frame
