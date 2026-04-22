@@ -79,7 +79,39 @@ def test_colisao_apenas_com_corpo():
     corpo_seguro = [(10,5), (9,5), (8,5)]
     assert snake_funcs.colisao(corpo_seguro) == False
 
-#Etapa 6 - Regras de Progressão
+#Etapa 6 - Atravessar Paredes
+def test_atravessar_parede_direita():
+    dimensoes = (20, 10)
+    corpo = [(19, 5), (18, 5)]
+    frutas = []
+    
+    novo_corpo, _ = snake_funcs.mover_cobra(corpo, frutas, "d", dimensoes)
+    
+    assert novo_corpo[0] == (0, 5)
 
+def test_atravessar_parede_esquerda():
+    dimensoes = (20, 10)
+    corpo = [(0, 5), (1, 5)]
+    frutas = []
+    
+    novo_corpo, _ = snake_funcs.mover_cobra(corpo, frutas, "a", dimensoes)
+    
+    assert novo_corpo[0] == (19, 5)
 
-#Etapa 7 - Atravessar Paredes
+def test_atravessar_parede_cima():
+    dimensoes = (20, 10)
+    corpo = [(5, 0), (5, 1)]
+    frutas = []
+    
+    novo_corpo, _ = snake_funcs.mover_cobra(corpo, frutas, "w", dimensoes)
+    
+    assert novo_corpo[0] == (5, 9)
+
+def test_atravessar_parede_baixo():
+    dimensoes = (20, 10)
+    corpo = [(5, 9), (5, 8)]
+    frutas = []
+    
+    novo_corpo, _ = snake_funcs.mover_cobra(corpo, frutas, "s", dimensoes)
+    
+    assert novo_corpo[0] == (5, 0)
