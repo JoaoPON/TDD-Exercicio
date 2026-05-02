@@ -121,3 +121,9 @@ def test_deve_retornar_head_up():
     corpo = [(10, 5), (10, 6)]
     sprite = snake_funcs.obter_sprite(corpo, (20, 10))
     assert sprite == "head_up"
+
+
+def test_deve_retornar_head_down():
+    corpo = [(10, 7), (10, 6)]
+    sprite = snake_funcs.obter_sprite(corpo, (20, 10))
+    assert sprite == "head_down"
