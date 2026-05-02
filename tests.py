@@ -136,3 +136,11 @@ def test_cabeca_atravessando_parede():
     assert snake_funcs.obter_sprite([(10,0), (10,9)], dim) == "head_down"
     assert snake_funcs.obter_sprite([(19,5), (0,5)], dim) == "head_left"
     assert snake_funcs.obter_sprite([(0,5), (19,5)], dim) == "head_right"
+
+
+def test_deve_retornar_sprite_da_cauda():
+    dim = (20, 10)
+    corpo = [(10, 5), (10, 6), (10, 7)]
+    
+    sprite = snake_funcs.obter_sprite(corpo, dim, 2)
+    assert sprite == "tail_down"
