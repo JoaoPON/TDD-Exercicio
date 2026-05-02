@@ -1,50 +1,62 @@
-import time, snake_funcs
-from snake_screen import io_handler
+import pygame
+import snake_funcs
 
 def rodar_jogo():
-    # 1. Configurações iniciais
     dimensoes = (20, 10)
-    velocidade = 0.2
-    
-    interface = io_handler(dimensoes, velocidade)
+    tamanho_pixel = 40
+
+    pygame.init()
+    tela = pygame.display.set_mode((dimensoes[0]*tamanho_pixel, dimensoes[1]*tamanho_pixel))
+    clock = pygame.time.Clock()
+
+    sprites = {}
+    nomes = [
+        "head_up", "head_down", "head_left", "head_right",
+        "tail_up", "tail_down", "tail_left", "tail_right",
+        "body_horizontal", "body_vertical",
+        "body_bottomleft", "body_bottomright", "body_topleft", "body_topright",
+        "apple"
+    ]
+    for nome in nomes:
+        sprites[nome] = pygame.image.load(f"Graphics/{nome}.png")
 
     estado_jogo = snake_funcs.inicializar_jogo(*dimensoes)
-    
-    interface.record_inputs() # Começa a ouvir o teclado
+    direcao_atual = "d"
 
     while True:
-        direcao = interface.last_input
-        interface.display()
-        print("mova com WASD, saia com esc. Ultimo botão:", end=' ')
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                pygame.quit(); return
+            if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_w: direcao_atual = "w"
+                if evento.key == pygame.K_s: direcao_atual = "s"
+                if evento.key == pygame.K_a: direcao_atual = "a"
+                if evento.key == pygame.K_d: direcao_atual = "d"
+
+        estado_jogo["cobra"], estado_jogo["frutas"] = snake_funcs.mover_cobra(
+            estado_jogo["cobra"], estado_jogo["frutas"], direcao_atual, dimensoes
+        )
         
-        ###adicione seu código para lidar com o jogo aqui
-        
-        #Movimento o corpo da cobra
-        estado_jogo["cobra"], estado_jogo["frutas"] = snake_funcs.mover_cobra(estado_jogo["cobra"], estado_jogo["frutas"],interface.last_input, dimensoes)
         if snake_funcs.colisao(estado_jogo["cobra"]):
-            exit()
+            print(f"Game Over! Pontuação: {len(estado_jogo['cobra'])-2}")
+            pygame.quit(); return
+
         if len(estado_jogo["frutas"]) == 0:
             estado_jogo["frutas"] = snake_funcs.gerar_frutas(dimensoes, estado_jogo["cobra"])
-        #Limpa a matrix para o próximo frame
-        interface.matrix = [[0 for _ in range(dimensoes[0])] for _ in range(dimensoes[1])]
 
-        #Todas as posições são corpo
-        for x, y in estado_jogo["cobra"]:
-            interface.matrix[y][x] = 1 # 1 é corpo
+        tela.fill((50, 50, 50))
 
-        #primeira posição é a cabeça
-        cabeca_x, cabeca_y = estado_jogo["cobra"][0]
-        interface.matrix[cabeca_y][cabeca_x] = 2 # 2 é cabeça
+        for fx, fy in estado_jogo["frutas"]:
+            tela.blit(sprites["apple"], (fx * tamanho_pixel, fy * tamanho_pixel))
 
-        for x, y in estado_jogo["frutas"]:
-            interface.matrix[y][x] = 3 # 3 é fruta
+        for i in range(len(estado_jogo["cobra"])):
+            x, y = estado_jogo["cobra"][i]
 
+            nome_sprite = snake_funcs.obter_sprite(estado_jogo["cobra"], dimensoes, i)
+            tela.blit(sprites[nome_sprite], (x * tamanho_pixel, y * tamanho_pixel))
 
-        print(direcao)
-        print(f"Pontuação {len(estado_jogo["cobra"])-2}")
-        if(direcao == 'end'):
-            exit()
-        time.sleep(velocidade)
+        pygame.display.flip()
+        clock.tick(10)
 
 if __name__ == "__main__":
     rodar_jogo()

@@ -94,10 +94,10 @@ def obter_sprite(corpo, dimensoes, indice=0):
     if v_ant[1] == v_prox[1]: return "body_horizontal"
 
     mapeamento_curvas = {
-        frozenset({(0, -1), (1, 0)}):  "body_bottomleft",
-        frozenset({(0, -1), (-1, 0)}): "body_bottomright",
-        frozenset({(0, 1), (1, 0)}):   "body_topleft",
-        frozenset({(0, 1), (-1, 0)}):  "body_topright"
+        frozenset({(0, -1), (1, 0)}):  "body_topright",
+        frozenset({(0, -1), (-1, 0)}): "body_topleft",
+        frozenset({(0, 1), (1, 0)}):   "body_bottomright",
+        frozenset({(0, 1), (-1, 0)}):  "body_bottomleft"
     }
     
     vizinhos = frozenset({v_ant, v_prox})
