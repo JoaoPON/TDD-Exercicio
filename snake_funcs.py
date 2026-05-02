@@ -67,6 +67,7 @@ def colisao(corpo):
 def obter_sprite(corpo, dimensoes):
     delta = (corpo[0][0] - corpo[1][0], corpo[0][1] - corpo[1][1])
     direcoes = {
-        (0, -1): "head_up"
+        (0, -1): "head_up",
+        (0, 1): "head_down"
     }
     return direcoes.get(delta, "body_horizontal")
