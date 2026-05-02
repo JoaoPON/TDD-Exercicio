@@ -64,12 +64,29 @@ def gerar_frutas(dimensoes, corpo):
 def colisao(corpo):
     return corpo[0] in corpo[1:]
 
+def calcular_posicao(ponto_a, ponto_b, dimensoes):
+    largura, altura = dimensoes
+    dx = ponto_a[0] - ponto_b[0]
+    dy = ponto_a[1] - ponto_b[1]
+
+    if abs(dx) > largura / 2:
+        dx = dx - largura if dx > 0 else dx + largura
+    if abs(dy) > altura / 2:
+        dy = dy - altura if dy > 0 else dy + altura
+        
+    return dx, dy
+
 def obter_sprite(corpo, dimensoes):
-    dx = corpo[0][0] - corpo[1][0]
-    dy = corpo[0][1] - corpo[1][1]
+    cabeca = corpo[0]
+    pescoco = corpo[1]
     
-    if dy > 1: dy = -1
-    if dy < -1: dy = 1
+    delta = calcular_posicao(cabeca, pescoco, dimensoes)
     
-    direcoes = {(0, -1): "head_up", (0, 1): "head_down"}
-    return direcoes.get((dx, dy), "body_horizontal")
+    direcoes_cabeca = {
+        (0, -1): "head_up",
+        (0, 1):  "head_down",
+        (-1, 0): "head_left",
+        (1, 0):  "head_right"
+    }
+    
+    return direcoes_cabeca.get(delta, "body_horizontal")

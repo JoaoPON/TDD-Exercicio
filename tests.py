@@ -129,7 +129,10 @@ def test_deve_retornar_head_down():
     assert sprite == "head_down"
 
 
-def test_cabeca_atravessando_parede_topo():
-    corpo = [(10,9), (10,0)]
-    sprite = snake_funcs.obter_sprite(corpo, (20,10))
-    assert sprite == "head_up"
+def test_cabeca_atravessando_parede():
+    dim = (20, 10)
+
+    assert snake_funcs.obter_sprite([(10,9), (10,0)], dim) == "head_up"
+    assert snake_funcs.obter_sprite([(10,0), (10,9)], dim) == "head_down"
+    assert snake_funcs.obter_sprite([(19,5), (0,5)], dim) == "head_left"
+    assert snake_funcs.obter_sprite([(0,5), (19,5)], dim) == "head_right"
