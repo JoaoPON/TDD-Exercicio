@@ -76,17 +76,19 @@ def calcular_posicao(ponto_a, ponto_b, dimensoes):
         
     return dx, dy
 
-def obter_sprite(corpo, dimensoes):
-    cabeca = corpo[0]
-    pescoco = corpo[1]
+def obter_sprite(corpo, dimensoes, indice=0):
+    atual = corpo[indice]
     
-    delta = calcular_posicao(cabeca, pescoco, dimensoes)
-    
-    direcoes_cabeca = {
-        (0, -1): "head_up",
-        (0, 1):  "head_down",
-        (-1, 0): "head_left",
-        (1, 0):  "head_right"
-    }
-    
-    return direcoes_cabeca.get(delta, "body_horizontal")
+    if indice == 0:
+        pescoco = corpo[1]
+        delta = calcular_posicao(atual, pescoco, dimensoes)
+        direcoes = {(0, -1): "head_up", (0, 1): "head_down", (-1, 0): "head_left", (1, 0): "head_right"}
+        return direcoes.get(delta)
+
+    if indice == len(corpo) - 1:
+        anterior = corpo[indice - 1]
+        delta = calcular_posicao(atual, anterior, dimensoes)
+        direcoes = {(0, -1): "tail_up", (0, 1): "tail_down", (-1, 0): "tail_left", (1, 0): "tail_right"}
+        return direcoes.get(delta)
+
+    return "body_horizontal"
