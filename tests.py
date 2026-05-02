@@ -115,3 +115,9 @@ def test_atravessar_parede_baixo():
     novo_corpo, _ = snake_funcs.mover_cobra(corpo, frutas, "s", dimensoes)
     
     assert novo_corpo[0] == (5, 0)
+
+
+def test_deve_retornar_sprite_cabeca_para_cima():
+    corpo = [(10, 5), (10, 6)]
+    sprite = snake_funcs.obter_sprite(corpo, (20, 10))
+    assert sprite == "head_up"
