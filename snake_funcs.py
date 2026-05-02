@@ -63,3 +63,12 @@ def gerar_frutas(dimensoes, corpo):
 
 def colisao(corpo):
     return corpo[0] in corpo[1:]
+
+def obter_sprite(corpo, dimensoes):
+    # Diferença simples: atual - anterior
+    dx = corpo[0][0] - corpo[1][0]
+    dy = corpo[0][1] - corpo[1][1]
+    
+    if dx == 0 and dy == -1:
+        return "head_up"
+    return "body_horizontal"
