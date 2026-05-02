@@ -80,15 +80,16 @@ def obter_sprite(corpo, dimensoes, indice=0):
     atual = corpo[indice]
     
     if indice == 0:
-        pescoco = corpo[1]
-        delta = calcular_posicao(atual, pescoco, dimensoes)
-        direcoes = {(0, -1): "head_up", (0, 1): "head_down", (-1, 0): "head_left", (1, 0): "head_right"}
-        return direcoes.get(delta)
+        vizinho = corpo[1]
+        prefixo = "head_"
+    elif indice == len(corpo) - 1:
+        vizinho = corpo[indice - 1]
+        prefixo = "tail_"
+    else:
+        return "body_horizontal"
 
-    if indice == len(corpo) - 1:
-        anterior = corpo[indice - 1]
-        delta = calcular_posicao(atual, anterior, dimensoes)
-        direcoes = {(0, -1): "tail_up", (0, 1): "tail_down", (-1, 0): "tail_left", (1, 0): "tail_right"}
-        return direcoes.get(delta)
-
-    return "body_horizontal"
+    delta = calcular_posicao(atual, vizinho, dimensoes)
+    
+    mapeamento = {(0, -1): "up", (0, 1): "down", (-1, 0): "left", (1, 0): "right"}
+    
+    return prefixo + mapeamento.get(delta)
