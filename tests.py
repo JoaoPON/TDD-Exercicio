@@ -144,3 +144,15 @@ def test_deve_retornar_sprite_da_cauda():
     
     sprite = snake_funcs.obter_sprite(corpo, dim, 2)
     assert sprite == "tail_down"
+
+
+def test_deve_identificar_todas_as_quinas():
+    dim = (20, 10)
+
+    assert snake_funcs.obter_sprite([(10, 4), (10, 5), (11, 5)], dim, 1) == "body_bottomleft"
+
+    assert snake_funcs.obter_sprite([(10, 4), (10, 5), (9, 5)], dim, 1) == "body_bottomright"
+
+    assert snake_funcs.obter_sprite([(10, 6), (10, 5), (11, 5)], dim, 1) == "body_topleft"
+
+    assert snake_funcs.obter_sprite([(10, 6), (10, 5), (9, 5)], dim, 1) == "body_topright"
