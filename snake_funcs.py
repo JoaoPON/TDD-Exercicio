@@ -79,17 +79,37 @@ def calcular_posicao(ponto_a, ponto_b, dimensoes):
 def obter_sprite(corpo, dimensoes, indice=0):
     atual = corpo[indice]
     
-    if indice == 0:
-        vizinho = corpo[1]
-        prefixo = "head_"
-    elif indice == len(corpo) - 1:
-        vizinho = corpo[indice - 1]
-        prefixo = "tail_"
-    else:
+    if indice == 0 or indice == len(corpo) - 1:
+        vizinho = corpo[1] if indice == 0 else corpo[indice - 1]
+        prefixo = "head_" if indice == 0 else "tail_"
+        
+        dx, dy = calcular_posicao(atual, vizinho, dimensoes)
+        
+        direcoes = {
+            (0, -1): "up",
+            (0, 1):  "down",
+            (-1, 0): "left",
+            (1, 0):  "right"
+        }
+        return prefixo + direcoes[(dx, dy)]
+
+    v_ant = calcular_posicao(corpo[indice - 1], atual, dimensoes)
+    v_prox = calcular_posicao(corpo[indice + 1], atual, dimensoes)
+
+    if v_ant[0] == v_prox[0]: 
+        return "body_vertical"
+    if v_ant[1] == v_prox[1]: 
         return "body_horizontal"
 
-    delta = calcular_posicao(atual, vizinho, dimensoes)
+    vizinhos = {v_ant, v_prox}
     
-    mapeamento = {(0, -1): "up", (0, 1): "down", (-1, 0): "left", (1, 0): "right"}
-    
-    return prefixo + mapeamento.get(delta)
+    if {(0, -1), (1, 0)} == vizinhos:
+        return "body_bottomleft"
+    if {(0, -1), (-1, 0)} == vizinhos:
+        return "body_bottomright"
+    if {(0, 1), (1, 0)} == vizinhos:
+        return "body_topleft"
+    if {(0, 1), (-1, 0)} == vizinhos:
+        return "body_topright"
+
+    return "body_horizontal"
